@@ -1,4 +1,4 @@
-VERSÃO 0.5
+VERSÃO 1.0
 
 Jogo de Ouro - Resgate de Token 🏆
 
