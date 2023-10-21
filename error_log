@@ -1,0 +1,4 @@
+[20-Oct-2023 03:25:13 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/jogcom/public_html/tokens/display.php on line 8
+[20-Oct-2023 03:25:13 UTC] PHP Warning:  mysqli::__construct(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/jogcom/public_html/tokens/display.php on line 8
+[20-Oct-2023 03:25:17 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/jogcom/public_html/tokens/display.php on line 8
+[20-Oct-2023 03:25:17 UTC] PHP Warning:  mysqli::__construct(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/jogcom/public_html/tokens/display.php on line 8

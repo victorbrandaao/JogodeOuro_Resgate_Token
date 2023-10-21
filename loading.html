@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Ouro - Página de Loading</title>
+    <link rel="icon" type="image/png" href="https://d1s3ak279u1qfe.cloudfront.net/domains/jogodeourobet/img/icons/favicon-32x32.png">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease-in-out;
+            opacity: 1;
+            z-index: 100;
+        }
+
+        #loader.fadeOut {
+            opacity: 0;
+        }
+
+        img {
+            width: 200px;
+            height: auto;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="loader">
+    <img src="https://d1s3ak279u1qfe.cloudfront.net/domains/jogodeourobet/img/logo.png" alt="Logo" id="loading-logo">
+</div>
+
+<script>
+    var loader = document.getElementById('loader');
+    var logo = document.getElementById('loading-logo');
+    logo.style.animation = 'fadeInOut 2s infinite';
+    
+    // Simular processo de carregamento
+    setTimeout(function() {
+        loader.classList.add('fadeOut');
+    }, 5000);  // Esconder loader após 5 segundos
+</script>
+
+</body>
+</html>
