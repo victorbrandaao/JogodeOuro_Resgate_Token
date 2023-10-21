@@ -37,6 +37,7 @@ Este sistema utiliza práticas recomendadas para garantir a segurança dos dados
 Filtragem de Entrada: Todos os dados de entrada são filtrados e validados.
 Tratamento de Erros: Mensagens de erro do banco de dados não são exibidas diretamente ao usuário, evitando exposição de detalhes sensíveis.
 Prevenção de Injeção SQL: Utilizando consultas preparadas do PDO para evitar injeção SQL.
+
 🤝 Contribuição
 
 Contribuições são muito bem-vindas! Se você tem sugestões ou melhorias, sinta-se à vontade para abrir uma issue ou enviar um pull request.
