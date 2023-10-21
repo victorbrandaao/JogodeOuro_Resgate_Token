@@ -1,3 +1,5 @@
+VERSÃO 0.5
+
 Jogo de Ouro - Resgate de Token 🏆
 
 Bem-vindo ao repositório do sistema de resgate de tokens do Jogo de Ouro! Este sistema permite que os jogadores insiram seu login e resgatem um token associado a ele.
