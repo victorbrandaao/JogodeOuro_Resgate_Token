@@ -29,6 +29,7 @@ git clone https://github.com/victorbrandaao/JogodeOuro_Resgate_Token.git
 Conexão Segura com o Banco de Dados: Utilizando PDO para proteger contra ataques de injeção SQL.
 Validação de Entrada: Antes de qualquer operação no banco de dados, o sistema valida as entradas para garantir a integridade dos dados.
 Mensagens de Feedback: O sistema fornece feedback claro para o usuário após cada ação.
+
 🔒 Segurança
 
 Este sistema utiliza práticas recomendadas para garantir a segurança dos dados:
