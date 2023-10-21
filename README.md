@@ -16,7 +16,7 @@ Instalação
 
 ```
 
-git clone https://github.com/seu-usuario/nome-do-repositorio.git
+git clone https://github.com/victorbrandaao/JogodeOuro_Resgate_Token.git
 
 ```
 
