@@ -1,4 +1,4 @@
-VERSÃO 1.0
+VERSÃO 0.0.2
 
 Jogo de Ouro - Resgate de Token 🏆
 
@@ -16,7 +16,7 @@ Instalação
 
 ```
 
-git clone https://github.com/victorbrandaao/JogodeOuro_Resgate_Token.git
+git clone https://github.com/seu-usuario/nome-do-repositorio.git
 
 ```
 
@@ -29,7 +29,6 @@ git clone https://github.com/victorbrandaao/JogodeOuro_Resgate_Token.git
 Conexão Segura com o Banco de Dados: Utilizando PDO para proteger contra ataques de injeção SQL.
 Validação de Entrada: Antes de qualquer operação no banco de dados, o sistema valida as entradas para garantir a integridade dos dados.
 Mensagens de Feedback: O sistema fornece feedback claro para o usuário após cada ação.
-
 🔒 Segurança
 
 Este sistema utiliza práticas recomendadas para garantir a segurança dos dados:
@@ -37,7 +36,6 @@ Este sistema utiliza práticas recomendadas para garantir a segurança dos dados
 Filtragem de Entrada: Todos os dados de entrada são filtrados e validados.
 Tratamento de Erros: Mensagens de erro do banco de dados não são exibidas diretamente ao usuário, evitando exposição de detalhes sensíveis.
 Prevenção de Injeção SQL: Utilizando consultas preparadas do PDO para evitar injeção SQL.
-
 🤝 Contribuição
 
 Contribuições são muito bem-vindas! Se você tem sugestões ou melhorias, sinta-se à vontade para abrir uma issue ou enviar um pull request.

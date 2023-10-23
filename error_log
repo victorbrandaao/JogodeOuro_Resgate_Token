@@ -1,4 +1,13 @@
-[20-Oct-2023 03:25:13 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/jogcom/public_html/tokens/display.php on line 8
-[20-Oct-2023 03:25:13 UTC] PHP Warning:  mysqli::__construct(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/jogcom/public_html/tokens/display.php on line 8
-[20-Oct-2023 03:25:17 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/jogcom/public_html/tokens/display.php on line 8
-[20-Oct-2023 03:25:17 UTC] PHP Warning:  mysqli::__construct(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/jogcom/public_html/tokens/display.php on line 8
+[21-Oct-2023 22:01:02 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on boolean in /home/jogcom/public_html/tokens/admin.php:22
+Stack trace:
+#0 {main}
+  thrown in /home/jogcom/public_html/tokens/admin.php on line 22
+[22-Oct-2023 04:11:43 UTC] PHP Parse error:  syntax error, unexpected '<', expecting end of file in /home/jogcom/public_html/tokens/admin.php on line 23
+[22-Oct-2023 04:11:44 UTC] PHP Parse error:  syntax error, unexpected '<', expecting end of file in /home/jogcom/public_html/tokens/admin.php on line 23
+[22-Oct-2023 04:55:46 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/jogcom/public_html/tokens/admin.php on line 2
+[22-Oct-2023 04:55:46 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/jogcom/public_html/tokens/admin.php:1) in /home/jogcom/public_html/tokens/admin.php on line 6
+[22-Oct-2023 04:58:01 UTC] PHP Notice:  Undefined index: logins in /home/jogcom/public_html/tokens/admin.php on line 27
+[22-Oct-2023 04:58:01 UTC] PHP Notice:  Undefined index: tokens in /home/jogcom/public_html/tokens/admin.php on line 28
+[22-Oct-2023 05:22:14 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/jogcom/public_html/tokens/admin.php:46) in /home/jogcom/public_html/tokens/admin.php on line 137
+[22-Oct-2023 05:22:20 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/jogcom/public_html/tokens/admin.php:46) in /home/jogcom/public_html/tokens/admin.php on line 131
+[22-Oct-2023 05:22:22 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/jogcom/public_html/tokens/admin.php:46) in /home/jogcom/public_html/tokens/admin.php on line 131
