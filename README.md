@@ -9,25 +9,34 @@ Para embarcar nessa missão em seu próprio território (ambiente local), siga o
 
 📜 Pré-requisitos
 
-PHP 7.x ou superior - A linguagem dos antigos.
-MySQL ou MariaDB - Os guardiões dos dados.
+- PHP 7.x ou superior - A linguagem dos antigos.
+- MySQL ou MariaDB - Os guardiões dos dados.
+  
 🧙‍♂️ Instalação
 
-Clone este repositório: git clone https://github.com/seu-usuario/nome-do-repositorio.git
-Desvende os segredos (atualize as credenciais do banco de dados) no arquivo principal.
-Evoke os guardiões (crie um banco de dados) e chame os antigos (importe qualquer esquema necessário).
-Adentre o portal (acesse o sistema via navegador)!
+1. Clone este repositório: 
+
+git clone https://github.com/seu-usuario/nome-do-repositorio.git
+
+2. Desvende os segredos (atualize as credenciais do banco de dados) no arquivo principal.
+3. Evoke os guardiões (crie um banco de dados) e chame os antigos (importe qualquer esquema necessário).
+4. Adentre o portal (acesse o sistema via navegador)!
+   
 🛠️ Feitiços & Encantamentos (Funcionalidades)
+
 
 🛡 Conexão Segura com os Guardiões: Magias PDO protegem contra espíritos malignos de injeção SQL.
 🔮 Validação de Entrada: O oráculo verifica todas as entradas antes de permitir qualquer ritual.
 📜 Mensagens dos Antigos: Feedbacks místicos são entregues ao usuário.
+
 🔒 Armadilhas & Proteções (Segurança)
 
 🚫 Filtragem de Entrada: Todos os encantamentos são rigorosamente verificados.
 🌑 Tratamento de Erros: Os murmúrios dos guardiões não são revelados diretamente.
 🛡 Prevenção de Injeção SQL: Feitiços do PDO protegem nosso reino.
+
 🤝 Aliados & Parceiros (Contribuição)
+
 Guerreiros de código, magos de design e exploradores de bugs são sempre bem-vindos em nossa guilda! Se deseja juntar-se a nós, abra uma issue ou envie um pull request.
 
 📜 O Código dos Anciãos (Licença)
