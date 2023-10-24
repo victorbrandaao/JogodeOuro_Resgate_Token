@@ -1,8 +1,10 @@
 <?php
-$servername = "localhost";
-$username = "jogcom_felix";
-$password = "@JOGOouro100%";
-$dbname = "jogcom_betoken";
+require 'config.php';
+
+$servername = $config['db_host'];
+$username = $config['db_user'];
+$password = $config['db_pass'];
+$dbname = $config['db_name'];
 
 $message = null;
 $tokenRetrieved = false; 

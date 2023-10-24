@@ -1,7 +1,7 @@
 <?php
     session_start(); // Inicie a sessão aqui
 
-    // Verifique se o usuário está logado
+    // Verifique se o usuário está logadOO
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         header("Location: login.php");
         exit;
