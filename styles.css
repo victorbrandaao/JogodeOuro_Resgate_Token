@@ -1,77 +1,105 @@
+/* Estilos gerais */
 body {
     font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
 }
 
-#loader, #content {
+#content {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Loader */
+#loader {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
+#loading-logo {
+    max-width: 100px;
+}
+
+/* Estilo para a barra superior */
 #topbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #333;
     padding: 10px 20px;
+    color: #fff;
 }
 
 #topbar img {
-    width: 120px;  /* Ajuste o tamanho conforme necessário */
+    max-width: 150px;
 }
 
 .button {
-    padding: 10px 20px;
-    background-color: #f4f4f4;
+    padding: 8px 15px;
+    background-color: #f7b731;
+    color: #fff;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
+    border-radius: 5px;
+    text-transform: uppercase;
+    transition: background-color 0.3s;
 }
 
-h2 {
-    text-align: center;
-    margin-top: 20px;
+.button:hover {
+    background-color: #f39c12;
 }
 
+/* Estilos do formulário */
 form {
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 input[type="text"] {
+    padding: 8px;
+    margin: 10px 0;
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    max-width: 300px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
 }
 
 input[type="submit"] {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #007BFF;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
 }
 
 input[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #555;
 }
 
-/* Media Queries para ajustar o design em dispositivos menores */
+/* Ajustes para telas menores */
 @media (max-width: 600px) {
     #topbar {
         flex-direction: column;
+    }
+
+    #topbar img, #topbar div {
+        width: 100%;
+        text-align: center;
+        margin-top: 5px;
     }
 }
