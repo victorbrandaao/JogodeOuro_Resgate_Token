@@ -1,105 +1,121 @@
 <?php
-    session_start(); // Inicie a sessão aqui
+$servername = "localhost";
+$username = "jogcom_felix";
+$password = "@JOGOouro100%";
+$dbname = "jogcom_betoken";
 
-    // Verifique se o usuário está logado
-    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-        header("Location: login.php");
-        exit;
-    }
+$message = null;
+$tokenRetrieved = false; 
 
-    if (isset($_GET['logout'])) {
-        session_destroy();
-        header('Location: login.php'); // Redireciona para a página de login
-        exit;
-    }
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    error_log($e->getMessage());
+    die("Ocorreu um erro. Por favor, tente novamente mais tarde.");
+}
 
-    // Conexão com o banco de dados
-    $servername = "localhost";
-    $username = "jogcom_felix";
-    $password = "@JOGOouro100%";
-    $dbname = "jogcom_betoken";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $login = filter_input(INPUT_POST, 'login', FILTER_SANITIZE_STRING);
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    if(empty($login)) {
+        $message = "Login não pode estar vazio.";
+    } else {
+        try {
+            $stmt = $conn->prepare("SELECT token FROM jogadores WHERE login = :login");
+            $stmt->bindParam(':login', $login, PDO::PARAM_STR);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                $token = htmlspecialchars($row['token']);
+                $message = "Copie este código para realizar o resgate: ";
+                $tokenRetrieved = true;
 
-    // Verificar a conexão
-    if ($conn->connect_error) {
-        die("Erro de conexão: " . $conn->connect_error);
-    }
-
-    // Adiciona logins e tokens no banco de dados
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $logins = explode("\n", trim($_POST['logins']));
-        $tokens = explode("\n", trim($_POST['tokens']));
-
-        $stmt = $conn->prepare("INSERT INTO jogadores (login, token) VALUES (?, ?)");
-        
-        // Verificar se a consulta foi preparada corretamente
-        if ($stmt === false) {
-            die("Erro na preparação da consulta: " . $conn->error);
-        }
-
-        foreach ($logins as $index => $login) {
-            $token = isset($tokens[$index]) ? $tokens[$index] : '';
-            $stmt->bind_param("ss", $login, $token);
-            if (!$stmt->execute()) {
-                die("Erro ao inserir dados: " . $stmt->error);
+                $stmt = $conn->prepare("DELETE FROM jogadores WHERE login = :login");
+                $stmt->bindParam(':login', $login, PDO::PARAM_STR);
+                $stmt->execute();
+            } else {
+                $message = "Login não encontrado.";
             }
-        }
-
-        echo "Dados inseridos com sucesso!";
-        $stmt->close();
-    }
-
-    if (isset($_POST['deleteAllData'])) {
-        $conn->query("DELETE FROM jogadores");
-        echo "Todos os dados foram excluídos com sucesso!";
-    }
-    
-
-    // Recupera todos os logins e tokens do banco de dados
-    $result = $conn->query("SELECT login, token FROM jogadores");
-    $data = [];
-    if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $data[] = $row;
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            $message = "Ocorreu um erro. Por favor, tente novamente mais tarde.";
         }
     }
+}
 
-    $conn->close();
+$conn = null;
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <!-- (resto do cabeçalho) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Ouro - Resgate de Token</title>
+    <link rel="icon" type="image/png" href="https://d1s3ak279u1qfe.cloudfront.net/domains/jogodeourobet/img/icons/favicon-32x32.png">
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
-<body>
-    <!-- ... (restante do código HTML) -->
+<body style="text-align: center;">
+<div id="loader">
+    <img src="logo.png" alt="Logo" id="loading-logo">
+</div>
 
+<div class="mainContent">
+<?php if (!$tokenRetrieved): ?>
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" onsubmit="return validateForm()">
+        Digite seu login para resgatar o bônus: <input type="text" name="login" required>
+        <br><br>
+        <input type="submit" name="submit" value="QUERO MEU BÔNUS">
+    </form>
     <script>
-        function toggleData() {
-            var dataDiv = document.getElementById('dataDiv');
-            if (dataDiv.style.display === 'none' || dataDiv.style.display === '') {
-                dataDiv.style.display = 'block';
-            } else {
-                dataDiv.style.display = 'none';
+        function validateForm() {
+            var login = document.forms[0]["login"].value;
+            if (login == "") {
+                alert("Login não pode estar vazio");
+                return false;
             }
+            return true;
         }
     </script>
+    <?php endif; ?>
 
-    <!--Start of Tawk.to Script-->
-    <script type="text/javascript">
-        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-        (function () {
-            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-            s1.async = true;
-            s1.src = 'https://embed.tawk.to/653a70eea84dd54dc48584ac/1hdm4i9qe';
-            s1.charset = 'UTF-8';
-            s1.setAttribute('crossorigin', '*');
-            s0.parentNode.insertBefore(s1, s0);
-        })();
-    </script>
-    <!--End of Tawk.to Script-->
+    <?php
+    if ($message !== null) { // Alteração aqui para verificar se $message é diferente de null
+        echo "<div class='messageContainer'>";
+        echo "<p><b>" . htmlspecialchars($message) . "</b></p>";
+        if ($tokenRetrieved) {
+            echo "<div class='tokenBox'><input type='text' value='" . $token . "' id='userToken' readonly>";
+            echo "<button onclick='copyToken()'>Copiar Token</button></div>";
+            echo "<br><br>";
+            echo "<button class='resgateBtn' onclick=\"window.location.href='https://www.jogodeouro.bet/dashboard/promotions?openDialogToken=true'\">CLIQUE AQUI PARA RESGATAR</button>";
+        }
+        echo "</div>";
+    }
+    ?>
+</div>
+
+<script>
+    function copyToken() {
+        var tokenInput = document.getElementById('userToken');
+        tokenInput.select();
+        document.execCommand("copy");
+        alert("Token copiado com sucesso!");
+    }
+</script>
+
+<script>
+    var loader = document.getElementById('loader');
+    var content = document.getElementById('content');
+    
+    window.addEventListener('load', function() {
+        loader.classList.add('fadeOut');
+        setTimeout(function() {
+            loader.style.display = 'none';
+            content.style.display = 'block';
+        }, 1000);
+    });
+</script>
 
 </body>
 </html>

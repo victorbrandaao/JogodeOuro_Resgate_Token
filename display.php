@@ -1,10 +1,8 @@
 <?php
-require 'config.php';
-
-$servername = $config['db_host'];
-$username = $config['db_user'];
-$password = $config['db_pass'];
-$dbname = $config['db_name'];
+$servername = "localhost";
+$username = "jogcom_felix";
+$password = "@JOGOouro100%";
+$dbname = "jogcom_betoken";
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
