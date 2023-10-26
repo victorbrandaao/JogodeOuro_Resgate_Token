@@ -1,121 +1,119 @@
-<?php
-$servername = "localhost";
-$username = "jogcom_felix";
-$password = "@JOGOouro100%";
-$dbname = "jogcom_betoken";
-
-$message = null;
-$tokenRetrieved = false; 
-
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    error_log($e->getMessage());
-    die("Ocorreu um erro. Por favor, tente novamente mais tarde.");
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $login = filter_input(INPUT_POST, 'login', FILTER_SANITIZE_STRING);
-
-    if(empty($login)) {
-        $message = "Login não pode estar vazio.";
-    } else {
-        try {
-            $stmt = $conn->prepare("SELECT token FROM jogadores WHERE login = :login");
-            $stmt->bindParam(':login', $login, PDO::PARAM_STR);
-            $stmt->execute();
-            if ($stmt->rowCount() > 0) {
-                $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                $token = htmlspecialchars($row['token']);
-                $message = "Copie este código para realizar o resgate: ";
-                $tokenRetrieved = true;
-
-                $stmt = $conn->prepare("DELETE FROM jogadores WHERE login = :login");
-                $stmt->bindParam(':login', $login, PDO::PARAM_STR);
-                $stmt->execute();
-            } else {
-                $message = "Login não encontrado.";
-            }
-        } catch (PDOException $e) {
-            error_log($e->getMessage());
-            $message = "Ocorreu um erro. Por favor, tente novamente mais tarde.";
-        }
-    }
-}
-
-$conn = null;
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogo de Ouro - Resgate de Token</title>
-    <link rel="icon" type="image/png" href="https://d1s3ak279u1qfe.cloudfront.net/domains/jogodeourobet/img/icons/favicon-32x32.png">
-    <link rel="stylesheet" type="text/css" href="styles/index.css">
-</head>
-<body style="text-align: center;">
-<div id="loader">
-    <img src="logo.png" alt="Logo" id="loading-logo">
-</div>
+    <title>TOKEN PREMIADO - JOGODEOURO.BET</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #004d00; /* Cor de fundo ajustada para um verde escuro */
+        }
 
-<div class="mainContent">
-<?php if (!$tokenRetrieved): ?>
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" onsubmit="return validateForm()">
-        Digite seu login para resgatar o bônus: <input type="text" name="login" required>
-        <br><br>
-        <input type="submit" name="submit" value="QUERO MEU BÔNUS">
-    </form>
-    <script>
-        function validateForm() {
-            var login = document.forms[0]["login"].value;
-            if (login == "") {
-                alert("Login não pode estar vazio");
-                return false;
+        .centered {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 400px; /* Largura fixa do container */
+            background-color: #333; /* Cor de fundo do container */
+            border-radius: 10px; /* Bordas arredondadas */
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5); /* Sombra ao redor do container */
+            padding: 20px; /* Espaçamento interno do container */
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #ffffff; /* Cor do texto ajustada para branco */
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px; /* Bordas arredondadas */
+            margin-bottom: 20px; /* Espaçamento abaixo dos campos */
+        }
+
+        input[type="submit"], button {
+            width: 100%;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px; /* Bordas arredondadas */
+        }
+
+        button {
+            background-color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="centered">
+        <?php
+        if (!isset($_POST['login'])) {
+            echo '<h1>Digite seu login para resgatar seu bônus!</h1>';
+            echo '<form method="post" action="">';
+            echo '<input type="text" name="login" placeholder="Seu login" required>';
+            echo '<br><br>';
+            echo '<input type="submit" name="submit" value="RESGATAR MEU PRÊMIO">';
+            echo '</form>';
+        } else {
+            $servername = "localhost";
+            $username = "jogcom_felix";
+            $password = "@JOGOouro100%";
+            $dbname = "jogcom_betoken";
+
+            try {
+                $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                $login = $_POST['login'];
+
+                // Execute uma consulta para verificar se o login existe no banco de dados (tabela jogadores)
+                $stmt = $conn->prepare("SELECT token FROM jogadores WHERE login = :login");
+                $stmt->bindParam(':login', $login, PDO::PARAM_STR);
+                $stmt->execute();
+
+                if ($stmt->rowCount() > 0) {
+                    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $token = htmlspecialchars($row['token']);
+                    echo '<h1>VOCÊ ACABOU DE GANHAR UMA BANCA DE R$ 20,00!</h1>';
+                    echo '<input type="text" id="token" value="' . $token . '" readonly>';
+                    echo '<br><br>';
+                    echo '<button onclick="copyToken()">COPIAR TOKEN</button>';
+                    echo '<br><br>';
+                    echo '<button onclick="redirectResgate()">RESGATAR AGORA MESMO</button>';
+                } else {
+                    echo '<p>Login não encontrado.</p>';
+                }
+            } catch (PDOException $e) {
+                echo "Erro de conexão: " . $e->getMessage();
+            } finally {
+                $conn = null;
             }
-            return true;
+        }
+        ?>
+    </div>
+
+    <script>
+        function copyToken() {
+            var tokenInput = document.getElementById('token');
+            tokenInput.select();
+            document.execCommand("copy");
+            alert("Token copiado com sucesso!");
+        }
+
+        function redirectResgate() {
+            window.open('https://www.jogodeouro.bet/dashboard/promotions?openDialogToken=true', '_blank');
         }
     </script>
-    <?php endif; ?>
-
-    <?php
-    if ($message !== null) { // Alteração aqui para verificar se $message é diferente de null
-        echo "<div class='messageContainer'>";
-        echo "<p><b>" . htmlspecialchars($message) . "</b></p>";
-        if ($tokenRetrieved) {
-            echo "<div class='tokenBox'><input type='text' value='" . $token . "' id='userToken' readonly>";
-            echo "<button onclick='copyToken()'>Copiar Token</button></div>";
-            echo "<br><br>";
-            echo "<button class='resgateBtn' onclick=\"window.location.href='https://www.jogodeouro.bet/dashboard/promotions?openDialogToken=true'\">CLIQUE AQUI PARA RESGATAR</button>";
-        }
-        echo "</div>";
-    }
-    ?>
-</div>
-
-<script>
-    function copyToken() {
-        var tokenInput = document.getElementById('userToken');
-        tokenInput.select();
-        document.execCommand("copy");
-        alert("Token copiado com sucesso!");
-    }
-</script>
-
-<script>
-    var loader = document.getElementById('loader');
-    var content = document.getElementById('content');
-    
-    window.addEventListener('load', function() {
-        loader.classList.add('fadeOut');
-        setTimeout(function() {
-            loader.style.display = 'none';
-            content.style.display = 'block';
-        }, 1000);
-    });
-</script>
-
 </body>
 </html>
