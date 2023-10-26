@@ -52,7 +52,7 @@ $conn = null;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo de Ouro - Resgate de Token</title>
     <link rel="icon" type="image/png" href="https://d1s3ak279u1qfe.cloudfront.net/domains/jogodeourobet/img/icons/favicon-32x32.png">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="styles_index.css">
 </head>
 <body>
 <div id="loader">
