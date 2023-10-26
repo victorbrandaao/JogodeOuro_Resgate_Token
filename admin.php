@@ -182,7 +182,7 @@
 </head>
 <body>
     <div style="text-align:right; padding: 20px;">
-        Olá, <?php echo isset($_SESSION['users']) ? htmlspecialchars($_SESSION['users']) : 'Usuário'; ?>!
+        Olá, <?php echo isset($_SESSION['users']) ? htmlspecialchars($_SESSION['users']) : 'usuário'; ?>!
         <a href="?logout=true" class="logout-link"><i class="fas fa-sign-out-alt"></i> Encerrar Sessão</a>
     </div>
     <form action="admin.php" method="post">
