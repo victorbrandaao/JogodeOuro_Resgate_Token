@@ -66,10 +66,10 @@
             echo '<input type="submit" name="submit" value="RESGATAR MEU PRÊMIO">';
             echo '</form>';
         } else {
-            $servername = "localhost";
-            $username = "jogcom_felix";
-            $password = "@JOGOouro100%";
-            $dbname = "jogcom_betoken";
+            $servername = "#";
+            $username = "#";
+            $password = "#";
+            $dbname = "# ";
 
             try {
                 $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);

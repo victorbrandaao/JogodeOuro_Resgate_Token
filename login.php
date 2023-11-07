@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-$servername = "localhost";
-$username = "jogcom_felix";
-$password = "@JOGOouro100%";
-$dbname = "jogcom_betoken";
+$servername = "#";
+$username = "#";
+$password = "#";
+$dbname = "#";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
